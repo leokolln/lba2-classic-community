@@ -385,21 +385,7 @@
 // init Timer
 
 #if   ((inits) & INIT_TIMER)
-
-#ifdef	_WIN32
-
-        InitTimer() ;
-
-#else //_WIN32
-
-	if(!InitTimerAIL())
-        {
-	        LogPuts( "Error: Could not link timer routine with AIL INT8 handler.\n") ;
-	        exit( 1 ) ;
-        }
-
-#endif//_WIN32
-
+  InitTimer();
 #endif
 
 //··········································································
