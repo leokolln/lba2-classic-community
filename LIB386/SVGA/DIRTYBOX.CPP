@@ -20,6 +20,7 @@
 #ifdef	_WIN32
 #include	<SYSTEM/WINSYS.H>
 #include	<SVGA/DDRAW.H>
+#include <SVGA/VIDEO.H>
 
 #else //_WIN32
 #include	<system/dossys.h>
@@ -303,7 +304,7 @@ void DefaultBoxOneBlit(T_BOX *pbox)
 	if((pbox->x1<=pbox->x0) || (pbox->y1<=pbox->y0)) return	;
 
 #ifdef	_WIN32
-	CopyBox(Phys, Log, TabOffPhysLine, pbox);
+        CopyVideoArea(Phys, Log, TabOffPhysLine, pbox);
 #else
 	CopyBoxVESA(Phys, Log, TabOffPhysLine, pbox);
 #endif
@@ -312,7 +313,7 @@ void DefaultBoxOneBlit(T_BOX *pbox)
 //****************************************************************************
 void DefaultBoxOneClean(T_BOX *pbox)
 {
-	CopyBox(Log, Screen, TabOffLine, pbox)	;
+        CopyVideoArea(Log, Screen, TabOffLine, pbox)	;
 }
 
 //****************************************************************************
@@ -487,7 +488,7 @@ void	BoxBlitStaticListToScreen()
 
 	while(pBox)		 // walk the list
 	{
-		CopyBox(Screen, Log, TabOffLine, pBox);
+                CopyVideoArea(Screen, Log, TabOffLine, pBox);
 		pBox = pBox->pBoxNext ;
 	}
 }
@@ -549,7 +550,7 @@ void	BoxBlit()
 		}
 	}
 
-	if(BoxScreenGet)	(*BoxScreenGet)()	;// Get access to the screen
+        LockVideoSurface(); // Get access to the screen
 
 	BltListAndEmpty(&pBoxOptList)			;// Blit boxes to screen
 
@@ -578,7 +579,7 @@ void	BoxBlit()
 		BoxCleanClip = FALSE	;
 	}
 
-	if(BoxScreenRelease)	(*BoxScreenRelease)()	;// Release screen
+        UnlockVideoSurface(); // Release screen
 
 	if( FlagMouse && (x1>x0) && (y1>y0)) // remove sprite from Log
 	{
@@ -682,9 +683,9 @@ S32 BoxInit( S32 nbBox )
 		nbBox = 4	;
 	}
 
-	SetBoxScreenGet(NULL)			;
-	SetBoxScreenRelease(NULL);
-	SetBoxScreenFlip(NULL)			;
+	//SetBoxScreenGet(NULL)			;
+	//SetBoxScreenRelease(NULL);
+	//SetBoxScreenFlip(NULL)			;
 	SetBoxOneBlit(NULL)			;
 	SetBoxOneClean(NULL)			;
 

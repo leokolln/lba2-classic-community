@@ -115,7 +115,8 @@
 #define	APPNAME	"DefaultName"
 #endif//APPNAME
 
-	InitWindow(hInstance, nCmdShow, APPNAME)	;
+        // FIXME: Implement Correctly
+	//InitWindow(hInstance, nCmdShow, APPNAME)	;
 
 //··········································································
 #endif//defined(_WIN32)&&!defined(_ARG)
@@ -194,7 +195,7 @@
 // CMDLINE
 
 #if	defined(_WIN32)&&!defined(_ARG)
-	GetCmdLineWin(lpCmdLine);
+	//GetCmdLineWin(lpCmdLine); // FIXME: Implement Correctly
 #else//	defined(_WIN32)&&!defined(_ARG)
 	GetCmdLine(argc, argv)	;
 #endif//defined(_WIN32)&&!defined(_ARG)

@@ -1,4 +1,5 @@
 #include        "C_EXTERN.H"
+#include <SVGA/VIDEO.H>
 
 /*══════════════════════════════════════════════════════════════════════════*
  *══════════════════════════════════════════════════════════════════════════*/
@@ -3458,7 +3459,7 @@ void    EffectPcx( U8 numpcx, U8 *screen, U8 effect, U8 flagbcl )
                                 }
 
                                 BoxStaticAdd( 0, y-5, ModeDesiredX-1, ModeDesiredY-1 ) ;
-                                VblVESA() ;
+                                WaitVideoSync();
                                 BoxUpdate() ;
                         }
                 }; break ;

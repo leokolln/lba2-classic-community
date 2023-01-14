@@ -331,6 +331,7 @@ S32	FileSelector(	char *titre,
 
 	while( Click )
 	{
+                ManageEvents();
 		BoxUpdate()	;
 	}
 
@@ -358,6 +359,7 @@ S32	FileSelector(	char *titre,
 					if( StartFile < 0 )	StartFile = 0 ;
 					DrawListFiles(flags) ;
 					BoxUpdate()	;
+                                        ManageEvents();
 				}
 				oldnum = -1 ;
 			}

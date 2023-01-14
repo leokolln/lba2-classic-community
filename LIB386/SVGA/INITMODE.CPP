@@ -17,6 +17,7 @@
 
 //--------------------------------------------------------------------------
 #include	<SVGA/DDRAW.H>
+#include <SVGA/VIDEO.H>
 
 //--------------------------------------------------------------------------
 #else //_WIN32
@@ -127,7 +128,8 @@ static	S32	InitDesiredMode()
 		return	-1	;
 	}
 
-	res = DetectInitVESAMode(ModeDesiredX, ModeDesiredY, ModeDesiredDepth, VESAMemory)	;
+//	res = DetectInitVESAMode(ModeDesiredX, ModeDesiredY, ModeDesiredDepth, VESAMemory)	;
+	res = CreateVideoSurface(ModeDesiredX, ModeDesiredY, ModeDesiredDepth)	;
 
 #ifndef	_WIN32
 	CopyBoxVESA = CopyBoxVESAInit	;	// check gain for linear buffer
@@ -180,13 +182,15 @@ S32	InitGraphSvga(U32 resx, U32 resy, U32 depth)
 
 	if(!flag)
 	{
-		if(!InitVESA())
+		//if(!InitVESA())
+		if(!InitVideo())
 		{
 			LogPrintf("Error: Cannot initialize DirectDraw\n")	;
 			return 1	;
 		}
 
-		atexit((PTR_VOID_FUNC)EndVESA);
+//		atexit((PTR_VOID_FUNC)EndVESA);
+		atexit((PTR_VOID_FUNC)EndVideo);
 
 		flag = 1	;
 	}

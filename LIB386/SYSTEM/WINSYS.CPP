@@ -1,6 +1,9 @@
 //----------------------------------------------------------------------------
+#include <SYSTEM.H>
 #include	<SYSTEM/ADELINE.H>
 #include	<SYSTEM/WINSYS.H>
+#include <SVGA.H>
+#include <SDL2/SDL.h>
 
 //----------------------------------------------------------------------------
 #define	STYLE_FULLSCREEN	WS_EX_APPWINDOW
@@ -197,7 +200,71 @@ static long FAR PASCAL WrapWindowProc(	HWND hWnd, UINT message,
 }
 
 //----------------------------------------------------------------------------
-void	ManageEvents()
+// FIXME: Implement correctly, here just for quick test
+extern S32 AsciiMode;
+extern S32 Key;
+extern U8	TabKeys[]	;
+
+extern S32	LibMouseXDep, LibMouseYDep;
+
+void ManageEvents() {
+        SDL_PumpEvents();
+        {
+                SDL_Event event;
+
+                while (SDL_PollEvent(&event)) {
+                        switch (event.type) {
+                        case SDL_MOUSEMOTION:
+                          MouseX = event.motion.x;
+                          MouseY = event.motion.y;
+
+                          LibMouseXDep = event.motion.xrel;
+                          LibMouseYDep = event.motion.yrel;
+
+                          break;
+                        case SDL_MOUSEBUTTONDOWN:
+                          if (event.button.button == 1) {
+                            Click |= 1;
+                          }
+                          if (event.button.button == 3) {
+                            Click |= 2;
+                          }
+                          break;
+                        case SDL_MOUSEBUTTONUP:
+                          if (event.button.button == 1) {
+                            Click &= ~1;
+                          }
+                          if (event.button.button == 3) {
+                            Click &= ~2;
+                          }
+                          break;
+                        case SDL_QUIT:
+                          exit(0);
+                        }
+                }
+        }
+
+        const Uint8 *keystate = SDL_GetKeyboardState(NULL);
+        Key = 0;
+        for (int keyIndex = 0; keyIndex < SDL_NUM_SCANCODES; keyIndex++) {
+                if (keystate[keyIndex]) {
+                        Key = keyIndex;
+                        break;
+                }
+        }
+
+        memset(TabKeys, 0, 256);
+
+        for (int keyIndex = 0; keyIndex < SDL_NUM_SCANCODES; keyIndex++) {
+                if (keystate[keyIndex]) {
+                        TabKeys[KeyIndex(keyIndex)] |= KeyBit(keyIndex);
+                }
+        }
+
+        // GetKeyboardState(TabKeys);
+}
+
+/*void	ManageEvents()
 {
 	U32	milespaused = FALSE	;
 	MSG	msg			;
@@ -236,6 +303,6 @@ void	ManageEvents()
 	{
 		ResumeMiles()	;
 	}
-}
+}*/
 
 //----------------------------------------------------------------------------

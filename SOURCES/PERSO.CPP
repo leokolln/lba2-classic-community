@@ -1,4 +1,6 @@
 #include        "C_EXTERN.H"
+#include <SVGA/VIDEO.H>
+#include <SDL2/SDL.h>
 
 /*#ifndef DEMO
 #define THOMAS  1
@@ -2140,7 +2142,7 @@ void    ChangeProgDir( char *path )
 /*══════════════════════════════════════════════════════════════════════════*/
 /*══════════════════════════════════════════════════════════════════════════*/
 
-#ifdef  _WIN32
+#ifdef  _WIN32_XXX
 int PASCAL WinMain(     HINSTANCE hInstance, HINSTANCE hPrevInstance,
                         LPSTR lpCmdLine, int nCmdShow                   )
 {
@@ -2152,7 +2154,7 @@ int PASCAL WinMain(     HINSTANCE hInstance, HINSTANCE hPrevInstance,
         nCmdShow = nCmdShow ;
 
 #else //_WIN32
-int main(S32 argc, char *argv[])
+int main(int argc, char *argv[])
 {
         S32     load = FALSE ;
         U8      *ptrdos4gw ;

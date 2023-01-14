@@ -15,6 +15,7 @@
 */
 
 #include        "C_EXTERN.H"
+#include <SVGA/VIDEO.H>
 
 #define CONFIG_SHADE_LVL        MENU_SHADE_LVL
 

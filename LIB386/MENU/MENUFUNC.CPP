@@ -403,6 +403,7 @@ void	InputString( T_MENU *ptrmenu, S32 handle, S32 maxcar )
 	while( Key OR Click )
 	{
 		BoxUpdate()	;
+                ManageEvents();
 	}
 
 	SetClip(memoclipxmin, memoclipymin, memoclipxmax, memoclipymax)	;
@@ -471,6 +472,7 @@ S32	Confirm( const char *message, const char *oui, const char *non )
 	do
 	{
 		BoxUpdate()	;
+                ManageEvents();
 	}
 	while( Click OR Key )	;
 
@@ -495,6 +497,7 @@ S32	Confirm( const char *message, const char *oui, const char *non )
 
 	do
 	{
+                ManageEvents();
 		BoxUpdate()	;
 	}
 	while( Click OR Key )	;
