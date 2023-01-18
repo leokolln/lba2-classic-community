@@ -8,6 +8,8 @@
 
 #include 	"C_EXTERN.H"
 
+#include <SYSTEM/KEYBOARD_KEYS.H>
+
 #define	ULTRA	-1L
 #define	ALWAYS	ULTRA
 

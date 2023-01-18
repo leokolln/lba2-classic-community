@@ -1,6 +1,10 @@
 #include        "C_EXTERN.H"
+
 #include <SVGA/VIDEO.H>
-#include <SDL2/SDL.h>
+#include <SYSTEM/KEYBOARD.H>
+#include <SYSTEM/KEYBOARD_KEYS.H>
+
+#include <SDL2/SDL.h> // For SDL_main
 
 /*#ifndef DEMO
 #define THOMAS  1
@@ -2197,9 +2201,6 @@ int main(int argc, char *argv[])
 #endif
 
 	End_Error = ""  ;
-
-	// Passe en clavier "Splitté" (différenciation de chaque touche)
-	AllowExtendedKeyb() ;
 
 	InitProgram()   ;
 	InitMemory()    ;       // Alloue petits buffers

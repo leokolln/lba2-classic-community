@@ -12,6 +12,8 @@
 
 #include	"C_EXTERN.H"
 
+#include <SYSTEM/KEYBOARD.H>
+
 #define	GridSizeX  40000
 #define	GridSizeZ  40000
 

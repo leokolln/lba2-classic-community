@@ -31,7 +31,7 @@
 #include	<SYSTEM/HQRMEM.H>
 #include	<SYSTEM/HQRMLOAD.H>
 #include	<SYSTEM/HQRRESS.H>
-#include	<SYSTEM/INITKEYB.H>
+#include	<SYSTEM/KEYBOARD.H>
 #include	<SYSTEM/INPUT.H>
 #include	<SYSTEM/LOADMALL.H>
 #include	<SYSTEM/LOADSAVE.H>

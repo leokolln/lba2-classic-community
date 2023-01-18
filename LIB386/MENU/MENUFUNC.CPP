@@ -2,6 +2,9 @@
 #include	<SVGA.H>
 #include	<MENU.H>
 
+#include <SYSTEM/KEYBOARD.H>
+#include <SYSTEM/KEYBOARD_KEYS.H>
+
 #include	<stdlib.h>
 #include	<stdio.h>
 #include	<string.h>

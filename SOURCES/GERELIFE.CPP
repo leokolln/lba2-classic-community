@@ -1,6 +1,8 @@
 #include	"C_EXTERN.H"
 //#include	"messtwin.cpp"
 
+#include <SYSTEM/KEYBOARD_KEYS.H>
+
 U8	*PtrPrg ;
 U8	TypeAnswer ;
 

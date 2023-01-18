@@ -1,5 +1,8 @@
 #include 	"C_EXTERN.H"
 
+#include <SYSTEM/KEYBOARD.H>
+#include <SYSTEM/KEYBOARD_KEYS.H>
+
 #define	SHADE_INVENT_LVL	8
 
 extern	S32	FlagAnimWhoSpeak	;	// MESSAGE.CPP

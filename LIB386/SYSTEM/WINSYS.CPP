@@ -243,25 +243,6 @@ void ManageEvents() {
                         }
                 }
         }
-
-        const Uint8 *keystate = SDL_GetKeyboardState(NULL);
-        Key = 0;
-        for (int keyIndex = 0; keyIndex < SDL_NUM_SCANCODES; keyIndex++) {
-                if (keystate[keyIndex]) {
-                        Key = keyIndex;
-                        break;
-                }
-        }
-
-        memset(TabKeys, 0, 256);
-
-        for (int keyIndex = 0; keyIndex < SDL_NUM_SCANCODES; keyIndex++) {
-                if (keystate[keyIndex]) {
-                        TabKeys[KeyIndex(keyIndex)] |= KeyBit(keyIndex);
-                }
-        }
-
-        // GetKeyboardState(TabKeys);
 }
 
 /*void	ManageEvents()
