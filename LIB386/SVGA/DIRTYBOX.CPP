@@ -9,8 +9,9 @@
 #include	<SVGA/SAVBLOCK.H>
 #include	<SVGA/RESBLOCK.H>
 #include	<SVGA/GRAPH.H>
-#include	<SVGA/INIMOUSE.H>
 #include	<SVGA/DIRTYBOX.H>
+
+#include <SYSTEM/MOUSE.H>
 
 #include	<stdlib.h>
 #include	<string.h>
@@ -49,10 +50,6 @@ S32	BoxCleanClip						;
 //****************************************************************************
 BOX_FUNC  *BoxOneBlit, *BoxOneClean				;
 VOID_FUNC *BoxScreenGet, *BoxScreenRelease, *BoxScreenFlip	;
-
-//****************************************************************************
-S32	DefSprite	= 0			;
-void	*GphSprite 	= NULL			;
 
 //****************************************************************************
 static U8	BufferSprite[48*48] 		;
@@ -512,7 +509,7 @@ void	BoxBlit()
 	{
 		S32	sx, sy	;
 
-		GetBoxGraph(DefSprite, &x0, &y0, &x1, &y1, GphSprite)	;
+		GetBoxGraph(MouseSpriteGraphicNum, &x0, &y0, &x1, &y1, MouseSpriteGraphic)	;
 
 		sx = MouseX	;
 		sy = MouseY	;
@@ -543,7 +540,7 @@ void	BoxBlit()
 			ClipXMax	= ModeDesiredX-1		;
 			ClipYMax	= ModeDesiredY-1		;
 
-			AffGraph(DefSprite, sx, sy, GphSprite)		;
+			AffGraph(MouseSpriteGraphicNum, sx, sy, MouseSpriteGraphic)		;
 
 			// add box in optlist for immediate blit
 			NewBox(&pBoxOptList, x0, y0, x1, y1)		;

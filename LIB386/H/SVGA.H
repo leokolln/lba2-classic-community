@@ -41,8 +41,6 @@
 #include <SVGA/SCALEBOX.H>
 #include <SVGA/SCALESPT.H>
 #include <SVGA/SCALESPI.H>
-#include <SVGA/INIMOUSE.H>
-#include <SVGA/MOUSE.H>
 #include <SVGA/PAL.H>
 
 //──────────────────────────────────────────────────────────────────────────

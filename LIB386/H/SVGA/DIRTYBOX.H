@@ -35,10 +35,6 @@ extern S32	BoxClipXMin, BoxClipXMax,
 extern		S32	BoxCleanClip		;
 
 //-----------------------------------------------------------------------------
-extern		void	*GphSprite			;
-extern		S32	DefSprite			;
-
-//-----------------------------------------------------------------------------
 extern BOX_FUNC  *BoxOneBlit, *BoxOneClean			;
 extern VOID_FUNC *BoxScreenGet, *BoxScreenRelease, *BoxScreenFlip;
 

@@ -2108,11 +2108,11 @@ S32	GereMouseMovements( S32 boutons )
 	{
 		SaveTimer() ;
 
-		GetMouseDep() ;
+		ManageMouse() ;
 		while( MyClick )
 		{
 			MyGetInput() ;
-			GetMouseDep() ;
+			ManageMouse() ;
 
 			AlphaCam += MouseYDep ;
 			BetaCam += MouseXDep ;

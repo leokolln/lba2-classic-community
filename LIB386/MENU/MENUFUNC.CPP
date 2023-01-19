@@ -4,6 +4,7 @@
 
 #include <SYSTEM/KEYBOARD.H>
 #include <SYSTEM/KEYBOARD_KEYS.H>
+#include <SYSTEM/MOUSE.H>
 
 #include	<stdlib.h>
 #include	<stdio.h>
@@ -470,7 +471,7 @@ S32	Confirm( const char *message, const char *oui, const char *non )
 	AddButton( &menu, 2, len/2,2, len/2,1, FLAG_CENTRE, non ) ;
 	DrawMenu( &menu, -1, -1 ) ;
 
-	ShowMouse( 1 ) 		;
+	ShowMouse( true ) 		;
 
 	do
 	{
