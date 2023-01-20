@@ -9,6 +9,9 @@
 #include	<SVGA/LOGPHYS.H>
 #include	<SVGA/INITMODE.H>
 
+#include <SVGA/VIDEO.H>
+#include <SYSTEM/WINDOW.H>
+
 #include	<string.h>
 #include	<ctype.h>
 
@@ -16,7 +19,7 @@
 #ifdef	_WIN32
 
 //--------------------------------------------------------------------------
-#include	<SVGA/DDRAW.H>
+#include	<SVGA/DDRAW.H> // TODO: Remove when refactor this file
 #include <SVGA/VIDEO.H>
 
 //--------------------------------------------------------------------------
@@ -128,7 +131,9 @@ static	S32	InitDesiredMode()
 		return	-1	;
 	}
 
-//	res = DetectInitVESAMode(ModeDesiredX, ModeDesiredY, ModeDesiredDepth, VESAMemory)	;
+  if (!CreateWindowSurface(ModeDesiredX, ModeDesiredY, ModeDesiredDepth)) {
+                return -1;
+  }
 	res = CreateVideoSurface(ModeDesiredX, ModeDesiredY, ModeDesiredDepth)	;
 
 #ifndef	_WIN32

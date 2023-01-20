@@ -43,12 +43,6 @@
 #include	<SYSTEM/CMDLINE.H>
 #include	<SYSTEM/DISKDIR.H>
 
-#ifdef	_WIN32
-#include	<SYSTEM/WINSYS.H>
-#else// _WIN32
-#include	<SYSTEM/DOSSYS.H>
-#endif//_WIN32
-
 //──────────────────────────────────────────────────────────────────────────
 #define INIT_SVGA               (1<<0)
 #define INIT_SAMPLE             (1<<1)

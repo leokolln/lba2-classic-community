@@ -108,20 +108,6 @@
 	char	old_path2[_MAX_PATH]=""	;
 
 //··········································································
-#if	defined(_WIN32)&&!defined(_ARG)
-
-//··········································································
-#ifndef	APPNAME
-#define	APPNAME	"DefaultName"
-#endif//APPNAME
-
-        // FIXME: Implement Correctly
-	//InitWindow(hInstance, nCmdShow, APPNAME)	;
-
-//··········································································
-#endif//defined(_WIN32)&&!defined(_ARG)
-
-//··········································································
 // Quiet Log
 #if	((inits) & INIT_QUIET)
 	QuietLog = TRUE			;
@@ -182,6 +168,22 @@
 #if	((inits) & INIT_LOG)
 		CreateLog(PathConfigFile)	;
 #endif
+
+//··········································································
+InitEvents();
+
+//··········································································
+#if	defined(TRUE)&&!defined(_ARG) // _WIN32
+
+//··········································································
+#ifndef	APPNAME
+#define	APPNAME	"DefaultName"
+#endif//APPNAME
+
+  InitWindow(APPNAME)	;
+
+//··········································································
+#endif//defined(_WIN32)&&!defined(_ARG)
 
 //··········································································
 // Config File

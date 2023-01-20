@@ -8,9 +8,9 @@ extern "C" {
 #endif
 
 // --- Initialization ----------------------------------------------------------
-S32  InitVideo();
+bool InitVideo();
 void EndVideo();
-S32  CreateVideoSurface(U32 resX, U32 resY, U32 colorDepth);
+bool CreateVideoSurface(U32 resX, U32 resY, U32 colorDepth);
 
 // --- Draw --------------------------------------------------------------------
 void LockVideoSurface();

@@ -3,6 +3,8 @@
 #include <SVGA/VIDEO.H>
 #include <SYSTEM/KEYBOARD.H>
 #include <SYSTEM/KEYBOARD_KEYS.H>
+#include <SYSTEM/EVENTS.H> // Init events on INITADEL.C
+#include <SYSTEM/WINDOW.H> // Init events on INITADEL.C
 
 #include <SDL2/SDL.h> // For SDL_main
 

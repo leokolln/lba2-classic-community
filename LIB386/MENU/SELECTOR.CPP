@@ -2,6 +2,7 @@
 #include	<SVGA.H>
 #include	<MENU.H>
 
+#include <SYSTEM/EVENTS.H>
 #include <SYSTEM/KEYBOARD.H>
 #include <SYSTEM/KEYBOARD_KEYS.H>
 #include <SYSTEM/MOUSE.H>

@@ -11,24 +11,13 @@
 #include	<SVGA/GRAPH.H>
 #include	<SVGA/DIRTYBOX.H>
 
+#include <SVGA/VIDEO.H>
 #include <SYSTEM/MOUSE.H>
+#include <SYSTEM/EVENTS.H>
 
 #include	<stdlib.h>
 #include	<string.h>
 #include	<limits.h>
-
-//****************************************************************************
-#ifdef	_WIN32
-#include	<SYSTEM/WINSYS.H>
-#include	<SVGA/DDRAW.H>
-#include <SVGA/VIDEO.H>
-
-#else //_WIN32
-#include	<system/dossys.h>
-#include	<svga/copybov.h>
-#include	<svga/cleabov.h>
-
-#endif//_WIN32
 
 //****************************************************************************
 #ifdef	__cplusplus

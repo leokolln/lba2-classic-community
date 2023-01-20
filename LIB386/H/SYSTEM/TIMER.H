@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SYSTEM/ADELINE_TYPES.H>
+#include <SYSTEM/EVENTS.H> // For ManageEvents()
 
 // -----------------------------------------------------------------------------
 #ifdef __cplusplus

@@ -202,23 +202,6 @@ static long FAR PASCAL WrapWindowProc(	HWND hWnd, UINT message,
 	return	WindowProc(hWnd, message, wParam, lParam)	;
 }
 
-//----------------------------------------------------------------------------
-// FIXME: Implement correctly, here just for quick test
-void ManageEvents() {
-        SDL_PumpEvents();
-        {
-                SDL_Event event;
-                while (SDL_PollEvent(&event)) {
-                        HandleEventsMouse((void *)(&event));
-
-                        switch (event.type) {
-                        case SDL_QUIT:
-                          exit(0);
-                        }
-                }
-        }
-}
-
 /*void	ManageEvents()
 {
 	U32	milespaused = FALSE	;

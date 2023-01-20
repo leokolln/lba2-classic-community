@@ -1,6 +1,6 @@
 #include <SYSTEM/KEYBOARD.H>
 
-#include <SYSTEM/WINSYS.H>
+#include <SYSTEM/EVENTS.H>
 
 #include <SDL2/SDL_events.h>
 
