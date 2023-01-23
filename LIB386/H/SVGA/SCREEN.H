@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SYSTEM/ADELINE_TYPES.H>
+#include <SYSTEM/LIMITS.H>
 
 // -----------------------------------------------------------------------------
 #ifdef __cplusplus
@@ -8,22 +9,21 @@ extern "C" {
 #endif
 
 // --- Public state ------------------------------------------------------------
-extern bool AppActive; ///< Application running and in focus status
+extern void *Log;
+extern void *Screen;
+extern U32 ModeDesiredX; ///< X resolution for Log and Screen
+extern U32 ModeDesiredY; ///< Y resolution for Log and Screen
+extern U32 TabOffLine[ADELINE_MAX_Y_RES]; ///< Line offsets for Log and Screen
 
 // --- Initialization ----------------------------------------------------------
-bool InitWindow(const char *title);
-void EndWindow();
-bool IsWindowInitialized();
+bool InitScreen();
+void EndScreen();
 
 // --- Interface ---------------------------------------------------------------
-bool CreateWindowSurface(U32 resX, U32 resY);
-void *WindowSurface();
-void DestroyWindowSurface();
-void UpdateWindowSurface();
-void UpdateWindowSurfaceArea(const T_BOX area[], U32 areaCount);
+bool CreateScreenMemory(U32 resX, U32 resY);
 
-void ManageWindow();
-void HandleEventsWindow(const void *event);
+// -----------------------------------------------------------------------------
+#define CopyScreen(src, dst) FastCopy(dst, src, ModeDesiredX *ModeDesiredY)
 
 // =============================================================================
 #ifdef __cplusplus

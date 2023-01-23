@@ -1,6 +1,6 @@
 #include <SVGA/SDL.H>
 
-#include <SVGA/LOGPHYS.H>
+#include <SVGA/SCREEN.H>
 #include <SYSTEM/LOGPRINT.H>
 #include <SYSTEM/WINDOW.H>
 
@@ -15,6 +15,12 @@ extern "C" {
 // -----------------------------------------------------------------------------
 #define PAL_MAX_COLORS 256
 
+// --- Public state ------------------------------------------------------------
+void *Phys;
+U32 ModeResX;
+U32 ModeResY;
+U32 TabOffPhysLine[ADELINE_MAX_Y_RES];
+
 // --- Private state -----------------------------------------------------------
 SDL_Surface *sdlSurface = NULL;
 SDL_Palette *sdlPalette = NULL;
@@ -23,6 +29,13 @@ S32 screenLockCount = 0;
 // --- Initialization ----------------------------------------------------------
 bool InitVideo() {
   assert(sdlSurface == NULL);
+
+  if (!IsWindowInitialized()) {
+    LogPrintf("Error: Unable to initialize Video subsystem.\n"
+              "\tWindow subsystem was not initialized beforehand.\n");
+
+    return false;
+  }
 
   return true;
 }
@@ -36,12 +49,17 @@ void EndVideo() {
   sdlSurface = NULL;
 }
 
-bool CreateVideoSurface(U32 resX, U32 resY, U32 colorDepth) {
+// --- Interface ---------------------------------------------------------------
+bool CreateVideoSurface(U32 resX, U32 resY) {
   assert(sdlSurface == NULL);
   assert(sdlPalette == NULL);
 
   sdlSurface = (SDL_Surface *)(WindowSurface());
   if (sdlSurface == NULL) {
+    LogPrintf("Error: Unable to get SDL video surface.\n"
+              "\tResolution: %ux%u.\n",
+              resX, resY);
+
     return false;
   }
 
@@ -53,21 +71,33 @@ bool CreateVideoSurface(U32 resX, U32 resY, U32 colorDepth) {
               "\tSDL message: %s\n",
               errorMsg);
 
+    sdlSurface = NULL;
+
     return false;
   }
 
-  // Update global state
-  ModeResX = resX;      // Refers to Phys
-  ModeResY = resY;      // Refers to Phys
-  BytesScanLine = resX; // SDL surface pitch may be bigger than requested
-
-  // TODO: Remove when blit supported? // FIXME: Must respect colorDepth bytes
+  // Update public state
+  ModeResX = resX;
+  ModeResY = resY;
   Phys = malloc(resX * resY);
+
+  // Fill the phys table
+  S32 off = 0;
+  for (S32 i = 0; i < ADELINE_MAX_Y_RES; i++) {
+    TabOffPhysLine[i] = off;
+    off += VideoSurfacePitch();
+  }
 
   return true;
 }
 
-// --- Draw --------------------------------------------------------------------
+U32 VideoSurfacePitch() {
+  // TODO: Improve - SDL creates a surface with 32bpp, but code expects it to
+  //  be 8bpp, for now just supply what is expected but this may change when
+  //  port draw code to SDL blit
+  return ModeResX;
+}
+
 void LockVideoSurface() {
   assert(sdlSurface != NULL);
 

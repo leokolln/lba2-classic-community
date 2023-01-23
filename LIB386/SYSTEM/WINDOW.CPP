@@ -49,8 +49,12 @@ void EndWindow() {
   }
 }
 
+bool IsWindowInitialized() {
+  return windowSystemInitialized;
+}
+
 // --- Interface ---------------------------------------------------------------
-bool CreateWindowSurface(U32 resX, U32 resY, U32 colorDepth) {
+bool CreateWindowSurface(U32 resX, U32 resY) {
   assert(windowSystemInitialized == true);
   assert(sdlWindow == NULL);
 
@@ -59,9 +63,9 @@ bool CreateWindowSurface(U32 resX, U32 resY, U32 colorDepth) {
   if (sdlWindow == NULL) {
     const char *errorMsg = SDL_GetError();
     LogPrintf("Error: Unable to create SDL window.\n"
-              "\tResolution: %ux%ux%u.\n"
+              "\tResolution: %ux%u.\n"
               "\tSDL message: %s\n",
-              resX, resY, colorDepth, errorMsg);
+              resX, resY, errorMsg);
 
     return false;
   }

@@ -2,6 +2,8 @@
 #include	<SVGA.H>
 #include	<MENU.H>
 
+#include <SVGA/SCREEN.H>
+#include <SVGA/VIDEO.H>
 #include <SYSTEM/MOUSE.H>
 
 #include	<stdlib.h>

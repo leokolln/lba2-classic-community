@@ -1,5 +1,7 @@
 #include        "C_EXTERN.H"
 
+#include <SVGA/INITMODE.H> // Init events on INITADEL.C
+#include <SVGA/SCREEN.H>
 #include <SVGA/VIDEO.H>
 #include <SYSTEM/KEYBOARD.H>
 #include <SYSTEM/KEYBOARD_KEYS.H>
@@ -2195,7 +2197,7 @@ int main(int argc, char *argv[])
 	#define ibuffer ScreenAux
 	#define ibuffersize     (640*480+RECOVER_AREA)
 	#define lname   "lba2.cfg"
-	#define inits   INIT_DEFFILE|INIT_LOG|INIT_TIMER|INIT_SVGA|INIT_KEYB|INIT_SAMPLE|INIT_SMACKER
+	#define inits   INIT_DEFFILE|INIT_LOG|INIT_TIMER|INIT_WINDOW|INIT_VIDEO|INIT_KEYB|INIT_SAMPLE|INIT_SMACKER
 	#include <INITADEL.C>
 
 #ifdef	_WIN32

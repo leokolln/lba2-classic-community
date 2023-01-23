@@ -17,8 +17,6 @@
 #include <SVGA/CLRBOX.H>
 #include <SVGA/CLEABOV.H>
 #include <SVGA/DIRTYBOX.H>
-#include <SVGA/LOGPHYS.H>
-#include <SVGA/INITMODE.H>
 #include <SVGA/VESA.H>
 #include <SVGA/DDRAW.H>
 #include <SVGA/AFFSTR.H>

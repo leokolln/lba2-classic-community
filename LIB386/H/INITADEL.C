@@ -1,100 +1,23 @@
-//··········································································
-#ifndef	LIB_SYSTEM
+// -----------------------------------------------------------------------------
+#ifndef RESOLUTION_X
+#define RESOLUTION_X 640
+#endif
 
-#error ADELINE: you need to include SYSTEM.H
+#ifndef RESOLUTION_Y
+#define RESOLUTION_Y 480
+#endif
 
+#ifndef RESOLUTION_DEPTH
+#define RESOLUTION_DEPTH 8
+#endif
+
+#if (RESOLUTION_X & 7)
+#error Horizontal resolution must be a multiple of 8
 #endif
 
 //··········································································
 #ifdef	DEBUG_MALLOC
-
-	atexit(SafeErrorMallocMsg)	;
-
-#endif
-
-//··········································································
-#ifndef	inits
-
-#error ADELINE: you need to define inits before including INITADEL.C
-
-#endif
-
-//··········································································
-#ifndef	lname
-
-#error ADELINE: you need to define lname before including INITADEL.C
-
-#endif
-
-// TODO: Uncomment and fix includes check
-////··········································································
-//#ifndef	_STDLIB_H_INCLUDED
-//
-//#error ADELINE: you need to include STDLIB.H
-//
-//#endif
-//
-////··········································································
-//#ifndef	_STDIO_H_INCLUDED
-//
-//#error ADELINE: you need to include STDIO.H
-//
-//#endif
-//
-////··········································································
-//#ifndef	_STRING_H_INCLUDED
-//
-//#error ADELINE: you need to include STRING.H
-//
-//#endif
-//
-////··········································································
-//#ifndef	_DOS_H_INCLUDED
-//
-//#error ADELINE: you need to include DOS.H
-//
-//#endif
-//
-////··········································································
-//#ifndef	_DIRECT_H_INCLUDED
-//
-//#error ADELINE: you need to include DIRECT.H
-//
-//#endif
-//
-////··········································································
-//#ifndef	_CTYPE_H_INCLUDED
-//
-//#error ADELINE: you need to include CTYPE.H
-//
-//#endif
-
-//··········································································
-#ifndef	RESOLUTION_X
-
-#define	RESOLUTION_X		640
-
-#endif
-
-//··········································································
-#ifndef	RESOLUTION_Y
-
-#define	RESOLUTION_Y		480
-
-#endif
-
-//··········································································
-#ifndef	RESOLUTION_DEPTH
-
-#define	RESOLUTION_DEPTH	8
-
-#endif
-
-//··········································································
-#if	(RESOLUTION_X&7)
-
-#error ADELINE: horizontal resolution must be a multiple of 8
-
+atexit(SafeErrorMallocMsg);
 #endif
 
 //··········································································
@@ -172,18 +95,14 @@
 //··········································································
 InitEvents();
 
-//··········································································
-#if	defined(TRUE)&&!defined(_ARG) // _WIN32
+// --- WINDOW ------------------------------------------------------------------
+#if ((inits) & INIT_WINDOW)
+  LogPuts("\nInitialising Window. Please wait...\n");
 
-//··········································································
-#ifndef	APPNAME
-#define	APPNAME	"DefaultName"
-#endif//APPNAME
-
-  InitWindow(APPNAME)	;
-
-//··········································································
-#endif//defined(_WIN32)&&!defined(_ARG)
+  if (!InitWindow(APPNAME)) {
+    exit(1); // TODO: Implement graceful exit
+  }
+#endif
 
 //··········································································
 // Config File
@@ -195,30 +114,12 @@ InitEvents();
 
 //··········································································
 // CMDLINE
-
-#if	defined(_WIN32)&&!defined(_ARG)
-	//GetCmdLineWin(lpCmdLine); // FIXME: Implement Correctly
-#else//	defined(_WIN32)&&!defined(_ARG)
-	GetCmdLine(argc, argv)	;
-#endif//defined(_WIN32)&&!defined(_ARG)
+GetCmdLine(argc, argv);
 
 //··········································································
 // OS
 	LogPuts("\nIdentifying Operating System. Please wait...\n");
-
-	if(!FindAndRemoveParam("/OSNodetect"))
-	{
-		DetectOS()		;
-	}
-
 	DisplayOS()			;
-
-	if(ParamsOS())
-	{
-		LogPuts("\nSome command Line Parameters override OS detection.\nNew OS parameters:\n");
-
-		DisplayOS()		;
-	}
 
 //··········································································
 // CPU
@@ -264,30 +165,21 @@ InitEvents();
 
 	InitAIL() ;
 
-//··········································································
-// svga
-#ifdef _WIN32
-#if   ((inits) & (INIT_SVGA|INIT_VESA))
+// --- VIDEO -------------------------------------------------------------------
+#if ((inits) & INIT_VIDEO)
+  LogPuts("\nInitialising Video. Please wait...\n");
 
-#ifndef	LIB_SVGA
+  if (!InitVideo()) {
+    exit(1); // TODO: Implement graceful exit
+  }
 
-#error ADELINE: you need to include SVGA.H
+  if (!InitScreen()) {
+    exit(1); // TODO: Implement graceful exit
+  }
 
-#endif
-
-	LogPuts("\nInitialising SVGA device. Please wait...\n");
-
-	if(ParamsSvga())
-	{
-		LogPuts("\nSome command Line Parameters override SVGA detection.\n");
-	}
-
-        if(InitGraphSvga(RESOLUTION_X, RESOLUTION_Y, RESOLUTION_DEPTH))
-        {
-        	exit(1)	;
-        }
-
-#endif
+  if (!InitGraphics(RESOLUTION_X, RESOLUTION_Y)) {
+    exit(1); // TODO: Implement graceful exit
+  }
 #endif
 
 //··········································································

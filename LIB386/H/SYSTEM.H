@@ -44,11 +44,11 @@
 #include	<SYSTEM/DISKDIR.H>
 
 //──────────────────────────────────────────────────────────────────────────
-#define INIT_SVGA               (1<<0)
+#define INIT_VIDEO              (1<<0)
 #define INIT_SAMPLE             (1<<1)
 #define INIT_MIDI               (1<<2)
 #define INIT_SMACKER            (1<<3)
-#define INIT_VESA               (1<<4)
+#define INIT_WINDOW             (1<<4)
 
 #define INIT_SYSTEM             (1<<6)
 #define INIT_KEYB               (1<<7)

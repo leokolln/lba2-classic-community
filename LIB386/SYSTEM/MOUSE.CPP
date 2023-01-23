@@ -1,6 +1,6 @@
 #include <SYSTEM/MOUSE.H>
 
-#include <SVGA/INITMODE.H> // For ModeDesiredX, ModeDesiredY
+#include <SVGA/SCREEN.H> // For ModeDesiredX, ModeDesiredY
 
 #include <SDL2/SDL_events.h>
 #include <assert.h>

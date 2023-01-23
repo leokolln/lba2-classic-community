@@ -3,7 +3,6 @@
 #include	<SYSTEM/CPU.H>
 #include	<SYSTEM/A_MALLOC.H>
 #include	<SVGA/SCREENXY.H>
-#include	<SVGA/LOGPHYS.H>
 #include	<SVGA/CLRBOX.H>
 #include	<SVGA/COPYBOX.H>
 #include	<SVGA/SAVBLOCK.H>
@@ -11,6 +10,7 @@
 #include	<SVGA/GRAPH.H>
 #include	<SVGA/DIRTYBOX.H>
 
+#include <SVGA/SCREEN.H>
 #include <SVGA/VIDEO.H>
 #include <SYSTEM/MOUSE.H>
 #include <SYSTEM/EVENTS.H>

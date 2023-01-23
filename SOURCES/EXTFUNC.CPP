@@ -9,6 +9,8 @@
 
 #include "C_EXTERN.H"
 
+#include <SVGA/SCREEN.H>
+
 extern	S32	Nxw, Nyw, Nzw ;
 extern	S32	SaveNxw, SaveNzw ;
 extern	S32	OldX, OldY, OldZ ;
