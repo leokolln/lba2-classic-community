@@ -1,7 +1,10 @@
 #include <SYSTEM/EVENTS.H>
 
+#include <SVGA/VIDEO.H>
+#include <SYSTEM/KEYBOARD.H>
 #include <SYSTEM/LOGPRINT.H>
 #include <SYSTEM/MOUSE.H>
+#include <SYSTEM/TIMER.H>
 #include <SYSTEM/WINDOW.H>
 
 #include <SDL2/SDL.h>
@@ -49,10 +52,10 @@ void ManageEvents() {
     while (SDL_PollEvent(&event)) {
       const void *transparentEvent = (void *)(&event);
 
-      //HandleEventsTimer(transparentEvent);
+      HandleEventsTimer(transparentEvent);
       HandleEventsMouse(transparentEvent);
-      //HandleEventsKeyboard(transparentEvent);
-      //HandleEventsVideo(transparentEvent);
+      HandleEventsKeyboard(transparentEvent);
+      HandleEventsVideo(transparentEvent);
       HandleEventsWindow(transparentEvent);
     }
   }

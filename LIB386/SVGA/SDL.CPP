@@ -1,8 +1,9 @@
 #include <SVGA/SDL.H>
 
-#include <SVGA/SCREEN.H>
+#include <SVGA/DIRTYBOX.H> // For BoxStaticAdd and BoxCleanClip
+#include <SVGA/SCREEN.H>   // For ModeDesiredX, ModeDesiredY and Log buffer
 #include <SYSTEM/LOGPRINT.H>
-#include <SYSTEM/WINDOW.H>
+#include <SYSTEM/WINDOW.H> // For AppActive
 
 #include <SDL2/SDL.h>
 #include <assert.h>
@@ -225,6 +226,23 @@ void CopyVideoArea(void *dst, const void *src, const U32 tabOffDst[],
     if (dst == Phys) {
       UnlockVideoSurface();
       UpdateWindowSurfaceArea(area, 1);
+    }
+  }
+}
+
+void HandleEventsVideo(const void *event) {
+  assert(event != NULL);
+
+  const SDL_Event *sdlEvent = (SDL_Event *)(event);
+
+  if (sdlEvent->type == SDL_WINDOWEVENT) {
+    switch (sdlEvent->window.event) {
+    case SDL_WINDOWEVENT_FOCUS_GAINED:
+      if (!AppActive) {
+        BoxStaticAdd(0, 0, ModeDesiredX - 1, ModeDesiredY - 1);
+        BoxCleanClip = TRUE;
+      }
+      break;
     }
   }
 }

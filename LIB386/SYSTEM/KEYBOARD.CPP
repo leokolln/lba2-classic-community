@@ -3,6 +3,8 @@
 #include <SYSTEM/EVENTS.H>
 
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keyboard.h>
+#include <stdio.h>
 
 // -----------------------------------------------------------------------------
 #ifdef __cplusplus
@@ -48,10 +50,6 @@ void EndKeyboard() {
 }
 
 // --- Interface ---------------------------------------------------------------
-void ManageKeyboard() {
-  UpdateKeyboardState();
-}
-
 S32 GetAscii() {
   static S32 lastReturnedAscii = 0;
 
@@ -79,6 +77,21 @@ S32 GetAscii() {
 S32 CheckKey(U32 key) {
   return ((key) < 256 ? TabKeys[(key)] & 0x80
                       : TabKeys[256 - 32 + ((key) >> 3)] & (1 << ((key)&7)));
+}
+
+void GetKeyScancodeName(char *string, U8 strMaxLen, U32 scanCode) {
+  const char *name = SDL_GetScancodeName((SDL_Scancode)scanCode);
+  snprintf(string, strMaxLen, "%s", name);
+}
+
+void ManageKeyboard() {
+  UpdateKeyboardState();
+}
+
+void HandleEventsKeyboard(const void *event) {
+  // Empty
+  // New implementation using SDL does not make use of events, but this may
+  //  change in the future
 }
 
 // =============================================================================

@@ -19,10 +19,13 @@ extern U8  TabKeys[TABKEYS_NUM_KEYS]; ///< Keyboard and Joysticks state
 void InitKeyboard();
 void EndKeyboard();
 
-// ---- Interface --------------------------------------------------------------
-void ManageKeyboard();
+// --- Interface ---------------------------------------------------------------
 S32 GetAscii();
 S32 CheckKey(U32 key);
+void GetKeyScancodeName(char *string, U8 strMaxLen, U32 scanCode);
+
+void ManageKeyboard();
+void HandleEventsKeyboard(const void *event);
 
 // =============================================================================
 #ifdef __cplusplus

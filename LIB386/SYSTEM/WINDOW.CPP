@@ -138,16 +138,17 @@ void HandleEventsWindow(const void *event) {
 
   const SDL_Event *sdlEvent = (SDL_Event *)(event);
 
-  switch (sdlEvent->type) {
-  case SDL_QUIT:
-    exit(0); // FIXME: Implement graceful exit
-    break;
-  case SDL_WINDOWEVENT_FOCUS_GAINED:
-    AppActive = true;
-    break;
-  case SDL_WINDOWEVENT_FOCUS_LOST:
-    AppActive = false;
-    break;
+  if (sdlEvent->type == SDL_WINDOWEVENT) {
+    switch (sdlEvent->window.event) {
+    case SDL_WINDOWEVENT_FOCUS_GAINED:
+      AppActive = true;
+      break;
+    case SDL_WINDOWEVENT_FOCUS_LOST:
+      AppActive = false;
+      break;
+    }
+  } else if (sdlEvent->type == SDL_QUIT) {
+    exit(0); // TODO: Implement graceful exit
   }
 }
 

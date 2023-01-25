@@ -1,18 +1,10 @@
 #include <SYSTEM/TIMER.H>
 
-#include <SDL2/SDL_timer.h>
+#include <SYSTEM/WINDOW.H> // For AppActive
 
-// FIXME: Detect if Window lost or gained focus and implement:
-//  case WM_SETFOCUS:
-//    if (!AppActive) {
-//      UnlockTimer();
-//    }
-//    break;
-//  case WM_KILLFOCUS:
-//    if (AppActive) {
-//      LockTimer();
-//    }
-//    break;
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_timer.h>
+#include <assert.h>
 
 // -----------------------------------------------------------------------------
 #ifdef __cplusplus
@@ -77,7 +69,6 @@ void SetTimerHR(U32 time) {
   UnlockTimer();
 }
 
-// -----------------------------------------------------------------------------
 void ManageTime() {
   TimerSystemHR = SDL_GetTicks();
 
@@ -93,6 +84,27 @@ void ManageTime() {
     NbFramePerSecond = (CmptFrame * 1000 + time / 2) / time;
     CmptFrame = 0;
     LastEvaluate += (time / 1000) * 1000;
+  }
+}
+
+void HandleEventsTimer(const void *event) {
+  assert(event != NULL);
+
+  const SDL_Event *sdlEvent = (SDL_Event *)(event);
+
+  if (sdlEvent->type == SDL_WINDOWEVENT) {
+    switch (sdlEvent->window.event) {
+    case SDL_WINDOWEVENT_FOCUS_GAINED:
+      if (!AppActive) {
+        UnlockTimer();
+      }
+      break;
+    case SDL_WINDOWEVENT_FOCUS_LOST:
+      if (AppActive) {
+        LockTimer();
+      }
+      break;
+    }
   }
 }
 

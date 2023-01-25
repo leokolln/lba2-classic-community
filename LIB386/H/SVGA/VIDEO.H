@@ -30,6 +30,8 @@ void SetVideoPaletteSync(const U8 src[]);
 void CopyVideoArea(void *dst, const void *src, const U32 tabOffDst[],
                    const T_BOX *area);
 
+void HandleEventsVideo(const void *event);
+
 // -----------------------------------------------------------------------------
 #define Palette(Pal) SetVideoPalette(Pal, 0, 256)
 #define PalOne(col, r, g, b) SetVideoPaletteCol(col, r, g, b)
